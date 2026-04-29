@@ -1,0 +1,45 @@
+.left{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.right{
+    text-align: center;
+    background-color: rgb(127,185,193,.20);
+}
+
+.rightContainer{
+    margin-top: 100px;
+}
+
+.imgLogo{
+    height: 350px;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.LD{
+    background-color: white;
+}
+
+.userInput{
+ margin-top: -0.3px;   
+}
+
+.nuevaContra{
+    background-color: rgba(158, 213, 218);
+    width: 300px;
+    height: 70px;
+    border-radius: 5px ;
+
+    font-size: 25px;
+}
+
+.contraLabel{
+    margin-right: 250px;
+}
+
+.userLabel{
+    margin-right: 280px;
+    margin-top: 50px;
+}

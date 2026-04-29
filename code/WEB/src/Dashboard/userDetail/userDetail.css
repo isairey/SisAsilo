@@ -1,0 +1,191 @@
+.userBanner{
+    background-color: white;
+    border-radius: 32px;
+    margin-left: 25px;
+    margin-top: 10px;
+    /* margin-right: 10px; */
+    /* height: 30%; */
+    width: 40%;
+    align-items: center;
+}
+
+.containerDetail{
+    height: 100%;
+}
+
+.zonedetails{
+    width: 57%;
+    margin-top: 10px;
+    /* background-color: rgb(255, 4, 4); */
+    border-radius: 32px;
+}
+
+.topRow{
+    display:flex;
+    flex-direction:row;
+}
+
+.userimg{
+    height: 200px;
+    width: 200px;
+}
+
+.generalInfo{
+    background: white;
+    border-radius: 20px;
+    display:flex;
+    flex-direction:row;
+    width: 100%;
+    padding-left: 2%;
+    font-weight: bold;
+    padding-top: 10px;
+    margin-bottom: 10px;
+}
+
+button{
+    width: 20%;
+    height: 15%;
+    margin-top: 15px;
+    font-size: 15px;
+    background-color: white;
+    border: 1px solid black;
+    border-radius: 32px;
+    /* margin-left: auto; */
+
+    /* position: relative;
+    right:-18%; */
+    /* align-items: flex-end; */
+}
+
+.generalExcel{
+    margin-left: auto;
+}
+
+.fa-clipboard{
+    font-size: 50px;
+    margin-right: 15px;
+    /* margin-left: 10px; */
+    /* position: relative;
+    right:-18%; */
+}
+
+.order-2{
+    height: 50px;width: 100px;
+    text-align: center;
+}
+
+.botRow{
+    background-color: white;
+    border-radius: 20px;
+    margin-right: 10px;
+    margin-left: 10px;
+    margin-top: 10px;
+    display:flex;
+    /* height:inherit; */
+    /* flex-direction:row; */
+}
+
+.generalExam{   
+    display:flex;
+    flex-direction:row;
+    align-items: center;
+    margin-top: 10px;
+    /* margin-bottom: 10px; */
+    margin-left: 10px;
+    width: 48.5%;
+}
+
+.generalExam button{   
+    width: 20%;
+    height: 30px;
+    margin-bottom: 10px;
+    border-radius: 32px;
+    margin-left: auto;
+    margin-right: 20px;
+}
+
+
+
+input:focus, textarea:focus, select:focus{
+    outline: none;
+}
+
+
+.MSSE{
+    /* background-color: #f47072; */
+    border-radius: 20px;
+}
+
+.SARCF{
+    background-color: #60d479;  
+    border-radius: 20px;
+}
+
+.CFS{
+    background-color: #60d479;
+    border-radius: 20px;
+}
+
+.KATZ{
+    background-color: #f8fb58;
+    border-radius: 20px;
+}
+
+.LWB{
+    background-color: #f47072;
+    border-radius: 20px;
+}
+
+.ADGY{
+    background-color: #60d479;
+    border-radius: 20px;
+}
+
+.PR{
+    background-color: #f47072;
+    border-radius: 20px;
+}
+
+.VSG{
+    background-color: #f8fb58;
+    border-radius: 20px;
+}
+
+.SPPB{
+    background-color: #60d479;
+    border-radius: 20px;
+    margin-bottom: 10px;
+}
+
+.subirBoton{
+    width: 20%;
+    height: 30px;
+    margin-bottom: 10px;
+    border: 1px solid black;
+    border-radius: 32px;
+    margin-left: auto;
+    margin-top: auto;
+    cursor: pointer;
+}
+
+.descargarBoton{
+    width: 20%;
+    height: 30px;
+    margin-bottom: 10px;
+    font-weight: bold;
+    border: 1px solid black;
+    border-radius: 32px;
+    margin-top: auto;
+    margin-right: 20px;
+    margin-left: 10px;
+}
+
+input[type="file"]{
+    display:none;
+}
+
+.INFO{
+    margin-right: 16px;
+    margin-left: 10px;
+    cursor: pointer;
+}

@@ -1,0 +1,58 @@
+.headers{
+    background: rgb(255, 255, 255);
+    font-size: 30px  ;
+    border-radius: 30px;
+    margin-bottom: 50px;
+}
+
+.containerTable{
+    overflow-y: scroll;
+    height: 98vh;
+}
+
+table{
+    table-layout:fixed;
+    width: 67vw;
+    margin-left: 9px;
+    margin-top: 10px;
+    margin-right: 10px;
+    /* border: 5px solid black; */
+    /* border-radius: 30px!important; */
+    height: 95vh;
+    overflow-x:hidden;
+}
+
+table td{
+    border: 1px solid #000000;
+    border-right: 0;
+    border-left: 0;
+    overflow: hidden;
+}
+
+table th{
+    border: 10px solid #D9D9D9;
+    border-radius: 20px;
+    border-right: 0;
+    border-left: 0;
+    /* border-radius: 20px; */
+}
+
+.userInfo{
+    background: white;
+    /* margin-top: 50px; */
+    /* height: 100%; */
+    font-size: 20px;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    overflow: hidden;
+    /* color: #898989; */
+}
+a:link { text-decoration: none; color: black;}
+a:visited { text-decoration: none; color: black;}
+a:hover { text-decoration: none; color: black;}
+a:active { text-decoration: none; color: black;}
+
+.AllContainer{ 
+    display: flex;
+    flex-direction: row;
+}

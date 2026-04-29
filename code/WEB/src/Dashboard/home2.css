@@ -1,0 +1,12 @@
+.rowC2{
+    display:flex;
+    flex-direction:row;
+}
+
+.userRow2{
+    width: 80%;
+}
+
+.detailRow2{
+    width: 100%;
+}

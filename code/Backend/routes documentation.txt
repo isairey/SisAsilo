@@ -1,0 +1,1303 @@
+
+GETTERS: 
+-----------------------------------------------------------------------------
+http://localhost:3000/getExamenes
+Descripcion: Retorna todas las posibles pruebas que existen en la BD
+Input: NULL
+Output: ID examen, Nombre del Examen
+Ejemplo: {
+        "IdExamen": 1,
+        "Nombre": "Índice de Katz"
+    },
+    {
+        "IdExamen": 2,
+        "Nombre": "Índice de Lawton & Brody"
+    },
+
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getAccesoUsuariosAPP
+Descripcion: Retorna todos los correos y contrasenias de los usuarios con el rol de "Paciente" en la BD
+Input: NULL
+Output: Id Paciente, Correo, Contrasenia, Rol
+Ejemplo: 
+OUTPUT:
+    {
+        "IdPaciente": 1,
+        "Autorizacion": {
+            "Correo": "correo1@hotmail.com",
+            "Contrasenia": "contraseña1",
+            "Rol": "Paciente"
+        }
+    },
+    {
+        "IdPaciente": 2,
+        "Autorizacion": {
+            "Correo": "correo4@hotmail.com",
+            "Contrasenia": "contraseña4",
+            "Rol": "Paciente"
+        }
+    },
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getAccesoMedico/:correo/:contrasenia
+Descripcion: Retorna true y el rol de "Medico" si es que el registro enviado corresponde con la BD
+Input: correo, contrasenio
+Output: Is_Active, Rol
+Ejemplo: 
+INPUT: correo: correo2@hotmail.com, 
+	contrasenia: contraseña2
+OUTPUT:
+    {
+        "Is_active",
+        "Rol": "Medico"
+    }
+
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getAccesoAdmin/:correo/:contrasenia
+Descripcion: Retorna true y el rol de "Administrador" si es que el registro enviado corresponde con la BD
+Input: correo, contrasenio
+Output: Is_Active, Rol
+Ejemplo: 
+INPUT: correo: correo3@hotmail.com, 
+	contrasenia: contraseña3
+OUTPUT:
+    {
+        "Is_active",
+        "Rol": "Administrador"
+    }
+
+
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getPreguntas/:id
+Descripcion: Retorna las preguntas respecto al id del examen con sus posibles respuestas.
+Input: id
+Output:  IdPregunta, Pregunta, IdPregunta, Pregunta, IdPregunta, Pregunta, Respuesta
+Ejemplo: 
+INPUT: id: 1
+OUTPUT:
+    [
+    {
+        "IdPregunta": 1,
+        "Pregunta": "A la hora de bañarse usted...",
+        "PreguntaRespuesta": [
+            {
+                "IdPregunta": 1,
+                "Pregunta": {
+                    "IdPregunta": 1,
+                    "Pregunta": "A la hora de bañarse usted...",
+                    "Register": "2022-10-13T18:54:03.210Z",
+                    "Is_active",
+                    "IdExamen": 1
+                },
+                "Respuesta": {
+                    "IdRespuesta": 1,
+                    "Respuesta": "No recibe ayuda",
+                    "Peso": 1,
+                    "Register": "2022-10-13T18:54:03.196Z",
+                    "Is_active"
+                }
+            },
+            {
+                "IdPregunta": 1,
+                "Pregunta": {
+                    "IdPregunta": 1,
+                    "Pregunta": "A la hora de bañarse usted...",
+                    "Register": "2022-10-13T18:54:03.210Z",
+                    "Is_active",
+                    "IdExamen": 1
+                },
+                "Respuesta": {
+                    "IdRespuesta": 2,
+                    "Respuesta": "Recibe ayuda con una parte del cuerpo",
+                    "Peso": 0.5,
+                    "Register": "2022-10-13T18:54:03.196Z",
+                    "Is_active"
+                }
+
+
+
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getPreguntasPorExamen/:id
+Descripcion: Retorna las preguntas respecto al id del examen con sus posibles respuestas.
+Input: id
+Output:  Nombre, Siglas, Pregunta, IdPregunta, Pregunta, Respuesta, Peso
+Ejemplo: 
+INPUT: id: 1
+OUTPUT:
+     {
+        "Nombre": "Índice de Katz",
+        "Siglas": "KATZ",
+        "Pregunta": [
+            {
+                "IdPregunta": 1,
+                "Pregunta": "A la hora de bañarse usted...",
+                "PreguntaRespuesta": [
+                    {
+                        "Respuesta": {
+                            "Respuesta": "No recibe ayuda",
+                            "Peso": 1
+                        }
+                    },
+                    {
+                        "Respuesta": {
+                            "Respuesta": "Recibe ayuda con una parte del cuerpo",
+                            "Peso": 0.5
+                        }
+                    },
+                    {
+                        "Respuesta": {
+                            "Respuesta": "Recibe ayuda con más de una parte",
+                            "Peso": 0.5
+                        }
+                    },
+
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getRespuestasPorPregunta/:id
+Descripcion: Retorna las respuestas respecto al id de la pregunta.
+Input: id
+Output:  IdRespuesta, Respuesta, Peso,
+Ejemplo: 
+INPUT: id: 1
+OUTPUT:
+[
+    {
+        "Respuesta": {
+            "IdRespuesta": 1,
+            "Respuesta": "No recibe ayuda",
+            "Peso": 1
+        }
+    },
+    {
+        "Respuesta": {
+            "IdRespuesta": 2,
+            "Respuesta": "Recibe ayuda con una parte del cuerpo",
+            "Peso": 0.5
+        }
+    },
+    {
+        "Respuesta": {
+            "IdRespuesta": 3,
+            "Respuesta": "Recibe ayuda con más de una parte",
+            "Peso": 0.5
+        }
+    },
+    {
+        "Respuesta": {
+            "IdRespuesta": 4,
+            "Respuesta": "No se baña",
+            "Peso": 0
+        }
+    }
+]
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getLineasDeAtencion
+Descripcion: Retorna toda la informacion de las Lineas de Atencion con su respectiva imagen en URL
+Input: NULL
+Output: IdLineaDeAtencion, Titulo, Nombre, Ubicacion, Telefono, Imagen{Ubicacion}
+Ejemplo:
+INPUT: id: 1
+OUTPUT: {
+        "IdLineaDeAtencion": 1,
+        "Titulo": "Psicologo",
+        "Nombre": "Joshua González",
+        "Ubicacion": "Cam. de los Quetzales 550, San Jeronimo, Monterrey",
+        "Telefono": "8112731886",
+        "Imagen": {
+            "Ubicacion": "https://psgestalt.cl/wp-content/uploads/2020/06/Perfil.jpg"
+        }
+    },
+    {
+        "IdLineaDeAtencion": 2,
+        "Titulo": "Atención de Emergencias",
+        "Nombre": "Número de Emergencia Nacional",
+        "Ubicacion": "Sin ubicación",
+        "Telefono": "911",
+        "Imagen": {
+            "Ubicacion": "https://www.gob.mx/cms/uploads/article/main_image/25704/iman_2.jpg"
+        }
+    },
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getUsuario/:id
+Descripcion: Retorna la información del Usuario respecto a su id
+Input: id
+Output: Nombre, ApellidoPaterno, APellidoMaterno, IdPaciente, FechaDeNacimiento, Nombre, Nombre, Nombre, Nombre
+Ejemplo: 
+INPUT: id: 1
+OUTPUT:    {
+        "Nombre": "Franco",
+        "ApellidoPaterno": "Sotomayo",
+        "APellidoMaterno": "Casale",
+        "Paciente": [
+            {
+                "IdPaciente": 1,
+                "FechaDeNacimiento": "1960-08-20T00:00:00.000Z",
+                "Parroquia": {
+                    "Nombre": "Parroquia 12",
+                    "Decanato": {
+                        "Nombre": "Decanato 6",
+                        "Zona": {
+                            "Nombre": "Zona 3",
+                            "Grupo": {
+                                "Nombre": "Grupo 2"
+                            }
+                        }
+                    }
+                }
+            }
+        ]
+    }
+]
+
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getDatosPaciente/:id
+Descripcion: Retorna la información del Paciente respecto a su id
+Input: id
+Output: IdPaciente, Genero, Peso, Estatura, TipoDeSangre, FechaDeNacimiento, Register, Is_active, Edad, IdAutorizacion, IdMedico, IdParroquia, IdImagen,Nombre, ApellidoPaterno, APellidoMaterno, Nombre, Nombre, Nombre, Nombre
+Ejemplo: 
+INPUT: id: 1
+OUTPUT:   {
+    "IdPaciente": 4,
+    "Genero": "M",
+    "Peso": 65.3,
+    "Estatura": 160,
+    "TipoDeSangre": "O-",
+    "FechaDeNacimiento": "1955-01-08T00:00:00.000Z",
+    "Register": "2022-10-13T18:54:03.266Z",
+    "Is_active",
+    "Edad": 67,
+    "IdAutorizacion": 7,
+    "IdMedico": 2,
+    "IdParroquia": 5,
+    "IdImagen": 14,
+    "Autorizacion": {
+        "Nombre": "Rubén",
+        "ApellidoPaterno": "Ruiz",
+        "APellidoMaterno": "Calva"
+    },
+    "Parroquia": {
+        "Nombre": "Parroquia 5",
+        "Decanato": {
+            "Nombre": "Decanato 3",
+            "Zona": {
+                "Nombre": "Zona 2",
+                "Grupo": {
+                    "Nombre": "Grupo 1"
+                }
+            }
+        }
+    }
+}
+
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getParroquia/:id
+Descripcion: Retorna la información de la Parroquia respecto a su id
+Input: id
+Output: IdDecanato, Nombre
+Ejemplo: 
+INPUT: id: 12
+OUTPUT:   [
+    {
+        "IdDecanato": 6,
+        "Nombre": "Parroquia 12"
+    }
+]
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getDecanato/:id
+Descripcion: Retorna la información del Decanato respecto a su id
+Input: id
+Output: IdZona, Nombre
+Ejemplo: 
+INPUT: id: 6
+OUTPUT:   [
+    {
+        "IdZona": 3,
+        "Nombre": "Decanato 6"
+    }
+]
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getZona/:id
+Descripcion: Retorna la información de la zona respecto a su id
+Input: id
+Output: IdGrupo, Nombre
+Ejemplo: 
+INPUT: id: 3
+OUTPUT:   [
+    {
+        "IdGrupo": 2,
+        "Nombre": "Zona 3"
+    }
+]
+
+
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getGrupo/:id
+Descripcion: Retorna la información del grupo respecto a su id
+Input: id
+Output: Nombre
+Ejemplo: 
+INPUT: id: 2
+OUTPUT:   [
+    {
+        "Nombre": "Grupo 2"
+    }
+]
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getResultadosPorPaciente/:id_paceinte/:id_examen
+Descripcion: Retorna la información de un paciente con su examen, respecto al id del paciente y id del examen
+Input: id_paciente, id_examen
+Output: Resultado, FechaDeExamen, Ubicacion, Evaluador
+Ejemplo: 
+INPUT: id_paceinte = 1, id_examen = 1
+OUTPUT:   [
+    {
+        "Resultado": 4,
+        "FechaDeExamen": "2022-09-20T00:00:00.000Z",
+        "Ubicacion": "Salud Digna",
+        "Evaluador": "Ramon Marquez"
+    },
+    {
+        "Resultado": 3,
+        "FechaDeExamen": "2022-09-26T00:00:00.000Z",
+        "Ubicacion": "Centro de Salud NL",
+        "Evaluador": "Daniela Ramos"
+    },
+    {
+        "Resultado": 999,
+        "FechaDeExamen": "2022-10-17T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil"
+    },
+    {
+        "Resultado": 10,
+        "FechaDeExamen": "2022-10-17T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil"
+    },
+    {
+        "Resultado": 10,
+        "FechaDeExamen": "2022-10-17T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil"
+    },
+    {
+        "Resultado": 10,
+        "FechaDeExamen": "2022-10-17T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil"
+    },
+    {
+        "Resultado": 999,
+        "FechaDeExamen": "2022-10-17T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil"
+    },
+    {
+        "Resultado": 999,
+        "FechaDeExamen": "2022-10-19T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil"
+    },
+    {
+        "Resultado": 10,
+        "FechaDeExamen": "2022-10-19T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil"
+    },
+    {
+        "Resultado": 10,
+        "FechaDeExamen": "2022-10-18T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil"
+    },
+    {
+        "Resultado": 10,
+        "FechaDeExamen": "2022-10-18T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil"
+    },
+    {
+        "Resultado": 10.5,
+        "FechaDeExamen": "2022-10-18T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil"
+    },
+    {
+        "Resultado": 11.5,
+        "FechaDeExamen": "2022-10-18T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil"
+    },
+    {
+        "Resultado": 11.5,
+        "FechaDeExamen": "2022-10-18T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil"
+    },
+    {
+        "Resultado": 0,
+        "FechaDeExamen": "2022-10-20T00:00:00.000Z",
+        "Ubicacion": "NoEspecificado",
+        "Evaluador": "Aplicación Movil"
+    },
+    {
+        "Resultado": 999,
+        "FechaDeExamen": "2022-10-20T00:00:00.000Z",
+        "Ubicacion": "NoEspecificado",
+        "Evaluador": "Aplicación Movil"
+    },
+    {
+        "Resultado": 6,
+        "FechaDeExamen": "2022-10-20T00:00:00.000Z",
+        "Ubicacion": "NoEspecificado",
+        "Evaluador": "AbuelitosABP"
+    },
+    {
+        "Resultado": 5,
+        "FechaDeExamen": "2022-10-22T00:00:00.000Z",
+        "Ubicacion": "NoEspecificado",
+        "Evaluador": "AbuelitosABP"
+    },
+    {
+        "Resultado": 5,
+        "FechaDeExamen": "2022-10-22T00:00:00.000Z",
+        "Ubicacion": "NoEspecificado",
+        "Evaluador": "AbuelitosABP"
+    },
+    {
+        "Resultado": 4.5,
+        "FechaDeExamen": "2022-10-22T00:00:00.000Z",
+        "Ubicacion": "NoEspecificado",
+        "Evaluador": "AbuelitosABP"
+    }
+]
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getResultadoRecientePorPaciente/:id_paceinte/:id_examen
+Descripcion: Retorna la información de un paciente con su ultimo examen aplicado, respecto al id del paciente y id del examen
+Input: id_paciente, id_examen
+Output: Resultado, FechaDeExamen, Ubicacion,  Evaluador, Nombre, Siglas,
+Ejemplo: 
+INPUT: id_paceinte = 1, id_examen = 1
+OUTPUT:   {
+    "Resultado": 5,
+    "FechaDeExamen": "2022-10-22T00:00:00.000Z",
+    "Ubicacion": "NoEspecificado",
+    "Evaluador": "AbuelitosABP",
+    "Examen": {
+        "Nombre": "Índice de Katz",
+        "Siglas": "KATZ"
+    }
+}
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getResultadosRecientesPorPaciente/:id_paceinte
+Descripcion: Retorna la información de un paciente con los ultimos examenes aplicado, respecto al id del paciente y id del examen
+Input: id_paciente, id_examen
+Output: Resultado, FechaDeExamen, Ubicacion, Evaluador,  Nombre, Siglas
+Ejemplo: 
+INPUT: id_paceinte = 1
+OUTPUT:   [
+    {
+        "Resultado": 4,
+        "FechaDeExamen": "2022-09-20T00:00:00.000Z",
+        "Ubicacion": "Salud Digna",
+        "Evaluador": "Ramon Marquez",
+        "Examen": {
+            "Nombre": "Índice de Katz",
+            "Siglas": "KATZ"
+        }
+    },
+    {
+        "Resultado": null,
+        "FechaDeExamen": null,
+        "Ubicacion": null,
+        "Evaluador": null,
+        "Examen": {
+            "Nombre": "Índice de Lawton & Brody",
+            "Siglas": "LW&B"
+        }
+    },
+    {
+        "Resultado": 999,
+        "FechaDeExamen": "2022-10-17T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil",
+        "Examen": {
+            "Nombre": "Escala Abreviada de Depresión Geriátrica de Yesavage",
+            "Siglas": "ADGY"
+        }
+    },
+    {
+        "Resultado": 999,
+        "FechaDeExamen": "2022-10-17T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil",
+        "Examen": {
+            "Nombre": "Mini Mental State Examination de Folstein (MMSE-30)",
+            "Siglas": "MMSE"
+        }
+    },
+    {
+        "Resultado": 999,
+        "FechaDeExamen": "2022-10-17T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil",
+        "Examen": {
+            "Nombre": "Prueba de reloj",
+            "Siglas": "PR"
+        }
+    },
+    {
+        "Resultado": 999,
+        "FechaDeExamen": "2022-10-17T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil",
+        "Examen": {
+            "Nombre": "Escala Sarc-F",
+            "Siglas": "SARC-F"
+        }
+    },
+    {
+        "Resultado": 999,
+        "FechaDeExamen": "2022-10-17T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil",
+        "Examen": {
+            "Nombre": "Escala de valoración sociofamiliar de Gijón",
+            "Siglas": "VSG"
+        }
+    },
+    {
+        "Resultado": 999,
+        "FechaDeExamen": "2022-10-17T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil",
+        "Examen": {
+            "Nombre": "Short Physical Performance Battery (Sppb)",
+            "Siglas": "SPPB"
+        }
+    },
+    {
+        "Resultado": 999,
+        "FechaDeExamen": "2022-10-17T00:00:00.000Z",
+        "Ubicacion": "Hospital Nuevo Sur",
+        "Evaluador": "Aplicación Movil",
+        "Examen": {
+            "Nombre": "Clinical Fraility Scale",
+            "Siglas": "CFS"
+        }
+    }
+]
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getRandomAcciones
+Descripcion: Retorna tres acciones random para la lista de actividades
+Input: NULL
+Output: Descripcion
+Ejemplo: 
+OUTPUT:   [
+    {
+        "Descripcion": "Realizar un pasatiempo, por ejemplo: jugar ajedrez, ver la tele, cocinar, contar una historia, hacer un sudoku, etc"
+    },
+    {
+        "Descripcion": "Toma una ducha de agua caliente"
+    },
+    {
+        "Descripcion": "Toma una siesta de 30 minutos"
+    }
+]
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getLogros
+Descripcion: Retorna los nombres de los logros disponibles en el sistema
+Input: NULL
+Output: Nombre, Descripcion, Ubicacion,
+Ejemplo: 
+OUTPUT:   [
+    {
+        "Nombre": "30 acciones",
+        "Descripcion": "Completa 30 acciones de la lista de tareas diarias",
+        "Imagen": {
+            "Ubicacion": "https://uxwing.com/wp-content/themes/uxwing/download/sport-and-awards/achievement-award-medal-icon.png"
+        }
+    },
+    {
+        "Nombre": "300 acciones",
+        "Descripcion": "Completa 300 acciones de la lista de tareas diarias",
+        "Imagen": {
+            "Ubicacion": "https://cdn-icons-png.flaticon.com/512/1378/1378582.png"
+        }
+    },
+    {
+        "Nombre": "Mis primeras 3",
+        "Descripcion": "Completa las 3 acciones de la lista de tareas diarias",
+        "Imagen": {
+            "Ubicacion": "https://cdn2.iconfinder.com/data/icons/business-solid-strawberry-economy/512/goal-512.png"
+        }
+    },
+    {
+        "Nombre": "El inicio de más actividades",
+        "Descripcion": "Accede por primera vez al sitio de Longevitta.mx desde esta aplicación",
+        "Imagen": {
+            "Ubicacion": "https://longevitta.mx/wp-content/uploads/2019/06/cropped-BANNER-LONGEVITTA-APROBADO-1.jpg"
+        }
+    }
+]
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getRangosDeExamen/:id_examen
+Descripcion: Retorna los rangos de evaluacion de una prueba, respecto a su id
+Input: id_examen
+Output: MinimoValor, MaximoValor, Indicador, Luz
+Ejemplo: 
+INPUT: id_examen = 1
+OUTPUT:   [
+    {
+        "MinimoValor": 0,
+        "MaximoValor": 0,
+        "Indicador": "Dependencia Total                                                                                                                                                                                                                                              ",
+        "Luz": 3
+    },
+    {
+        "MinimoValor": 1,
+        "MaximoValor": 5,
+        "Indicador": "Dependencia                                                                                                                                                                                                                                                    ",
+        "Luz": 2
+    },
+    {
+        "MinimoValor": 6,
+        "MaximoValor": 6,
+        "Indicador": "Independencia                                                                                                                                                                                                                                                  ",
+        "Luz": 1
+    }
+]
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getDatosPacientes
+Descripcion: Retorna toda la información de los pacientes registros en la APP
+Input: NULL
+Output: Edad, Nombre, ApellidoPaterno, APellidoMaterno, Examen, Nombre, Nombre, Nombre, Nombre
+Ejemplo: 
+OUTPUT:   [
+    {
+        "Edad": 62,
+        "Autorizacion": {
+            "Nombre": "Franco",
+            "ApellidoPaterno": "Sotomayo",
+            "APellidoMaterno": "Casale"
+        },
+        "ExamenPaciente": [
+            {
+                "Examen": {
+                    "IdExamen": 1,
+                    "Nombre": "Índice de Katz",
+                    "Siglas": "KATZ",
+                    "Dimension": "Funcionalidad",
+                    "Register": "2022-10-13T18:54:03.193Z",
+                    "Is_active": true
+                }
+            },
+            {
+                "Examen": {
+                    "IdExamen": 1,
+                    "Nombre": "Índice de Katz",
+                    "Siglas": "KATZ",
+                    "Dimension": "Funcionalidad",
+                    "Register": "2022-10-13T18:54:03.193Z",
+                    "Is_active": true
+                }
+            },
+            {
+                "Examen": {
+                    "IdExamen": 2,
+                    "Nombre": "Índice de Lawton & Brody",
+                    "Siglas": "LW&B",
+                    "Dimension": "Funcionalidad",
+                    "Register": "2022-10-13T18:54:03.193Z",
+                    "Is_active": true
+                }
+            },
+            {
+                "Examen": {
+                    "IdExamen": 2,
+                    "Nombre": "Índice de Lawton & Brody",
+                    "Siglas": "LW&B",
+                    "Dimension": "Funcionalidad",
+                    "Register": "2022-10-13T18:54:03.193Z",
+                    "Is_active": true
+                }
+            },
+            {
+                "Examen": {
+                    "IdExamen": 2,
+                    "Nombre": "Índice de Lawton & Brody",
+                    "Siglas": "LW&B",
+                    "Dimension": "Funcionalidad",
+                    "Register": "2022-10-13T18:54:03.193Z",
+                    "Is_active": true
+                }
+            },
+            {
+                "Examen": {
+                    "IdExamen": 2,
+                    "Nombre": "Índice de Lawton & Brody",
+                    "Siglas": "LW&B",
+                    "Dimension": "Funcionalidad",
+                    "Register": "2022-10-13T18:54:03.193Z",
+                    "Is_active": true
+                }
+            },
+            {
+                "Examen": {
+                    "IdExamen": 3,
+                    "Nombre": "Escala Abreviada de Depresión Geriátrica de Yesavage",
+                    "Siglas": "ADGY",
+                    "Dimension": "Afectivo",
+                    "Register": "2022-10-13T18:54:03.193Z",
+                    "Is_active": true
+                }
+            },
+
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getInformePaciente/:id
+Descripcion: Retorna toda la información un paciente respecto a su id
+Input: id
+Output: IdPaciente, Genero, Peso, Estatura, TipoDeSangre, FechaDeNacimiento, Register, Is_active, IdAutorizacion, IdMedico, IdParroquia, IdImagen, Edad, Nombre, ApellidoPaterno, APellidoMaterno, Rol, IdExamen, Nombre, Nombre, Nombre, Nombre
+Ejemplo: 
+INPUT: id_examen = 1
+OUTPUT:   {
+    "IdPaciente": 1,
+    "Genero": "M",
+    "Peso": 80.5,
+    "Estatura": 178,
+    "TipoDeSangre": "B+",
+    "FechaDeNacimiento": "1960-08-20T00:00:00.000Z",
+    "Register": "2022-10-13T18:54:03.266Z",
+    "Is_active": true,
+    "Edad": 62,
+    "IdAutorizacion": 1,
+    "IdMedico": 1,
+    "IdParroquia": 12,
+    "IdImagen": 11,
+    "Autorizacion": {
+        "Nombre": "Franco",
+        "ApellidoPaterno": "Sotomayo",
+        "APellidoMaterno": "Casale",
+        "Rol": "Paciente"
+    },
+    "ExamenPaciente": [
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 2
+        },
+        {
+            "IdExamen": 2
+        },
+        {
+            "IdExamen": 2
+        },
+        {
+            "IdExamen": 2
+        },
+        {
+            "IdExamen": 3
+        },
+        {
+            "IdExamen": 4
+        },
+        {
+            "IdExamen": 5
+        },
+        {
+            "IdExamen": 6
+        },
+        {
+            "IdExamen": 7
+        },
+        {
+            "IdExamen": 8
+        },
+        {
+            "IdExamen": 9
+        },
+        {
+            "IdExamen": 9
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 9
+        },
+        {
+            "IdExamen": 9
+        },
+        {
+            "IdExamen": 9
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 9
+        },
+        {
+            "IdExamen": 9
+        },
+        {
+            "IdExamen": 9
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 9
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 3
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 3
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 1
+        },
+        {
+            "IdExamen": 3
+        },
+        {
+            "IdExamen": 2
+        }
+    ],
+    "Parroquia": {
+        "Nombre": "Parroquia 12",
+        "Decanato": {
+            "Nombre": "Decanato 6",
+            "Zona": {
+                "Nombre": "Zona 3",
+                "Grupo": {
+                    "Nombre": "Grupo 2"
+                }
+            }
+        }
+    }
+}
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getInformesPacientes
+Descripcion: Retorna toda la información de todos los pacientes
+Input: NULL
+Output: Nombre, ApellidoPaterno, APellidoMaterno, Rol, Examen, Nombre, Nombre, Nombre, Nombre
+Ejemplo: 
+OUTPUT:   [
+    {
+        "Autorizacion": {
+            "Nombre": "Franco",
+            "ApellidoPaterno": "Sotomayo",
+            "APellidoMaterno": "Casale",
+            "Rol": "Paciente"
+        },
+        "ExamenPaciente": [
+            {
+                "Examen": {
+                    "Nombre": "Índice de Katz"
+                }
+            },
+            {
+                "Examen": {
+                    "Nombre": "Índice de Katz"
+                }
+            },
+            {
+                "Examen": {
+                    "Nombre": "Índice de Lawton & Brody"
+                }
+            },
+            {
+                "Examen": {
+                    "Nombre": "Índice de Lawton & Brody"
+                }
+            },
+            {
+                "Examen": {
+                    "Nombre": "Índice de Lawton & Brody"
+                }
+            },
+            {
+                "Examen": {
+                    "Nombre": "Índice de Lawton & Brody"
+                }
+            },
+            {
+                "Examen": {
+                    "Nombre": "Escala Abreviada de Depresión Geriátrica de Yesavage"
+                }
+            },
+            {
+                "Examen": {
+                    "Nombre": "Mini Mental State Examination de Folstein (MMSE-30)"
+                }
+            },
+            {
+                "Examen": {
+                    "Nombre": "Prueba de reloj"
+                }
+            },
+            {
+                "Examen": {
+                    "Nombre": "Escala Sarc-F"
+                }
+            },
+            {
+                "Examen": {
+                    "Nombre": "Escala de valoración sociofamiliar de Gijón"
+                }
+            },
+            {
+                "Examen": {
+                    "Nombre": "Short Physical Performance Battery (Sppb)"
+                }
+            },
+            {
+                "Examen": {
+                    "Nombre": "Clinical Fraility Scale"
+                }
+            },
+
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getDatosMedicos
+Descripcion: Retorna toda la información de todos los médicos en el sistema, así como la relación con sus pacientes
+Input: NULL
+Output: Nombre, ApellidoPaterno, APellidoMaterno,  Rol, IdMedico, Ubicacion, Idpaciente, Edad, Nombre, ApellidoPaterno, APellidoMaterno, Rol, Examen, Nombre, Nombre, Nombre, Nombre
+Ejemplo: 
+OUTPUT:   [
+    {
+        "Nombre": "Jose Gerardo",
+        "ApellidoPaterno": "Cantú",
+        "APellidoMaterno": "García",
+        "Rol": "Medico",
+        "Medico": [
+            {
+                "IdMedico": 1,
+                "Ubicacion": "Hospital 1",
+                "Paciente": [
+                    {
+                        "IdPaciente": 1,
+                        "Edad": 62,
+                        "Autorizacion": {
+                            "Nombre": "Franco",
+                            "ApellidoPaterno": "Sotomayo",
+                            "APellidoMaterno": "Casale",
+                            "Rol": "Paciente"
+                        },
+                        "Parroquia": {
+                            "Nombre": "Parroquia 12",
+                            "Decanato": {
+                                "Nombre": "Decanato 6",
+                                "Zona": {
+                                    "Nombre": "Zona 3",
+                                    "Grupo": {
+                                        "Nombre": "Grupo 2"
+                                    }
+                                }
+                            }
+                        }
+                    },
+                    {
+                        "IdPaciente": 2,
+                        "Edad": 67,
+                        "Autorizacion": {
+                            "Nombre": "Marcelo",
+                            "ApellidoPaterno": "Marquez",
+                            "APellidoMaterno": "Murillo",
+                            "Rol": "Paciente"
+                        },
+                        "Parroquia": {
+                            "Nombre": "Parroquia 15",
+                            "Decanato": {
+                                "Nombre": "Decanato 8",
+                                "Zona": {
+                                    "Nombre": "Zona 4",
+                                    "Grupo": {
+                                        "Nombre": "Grupo 2"
+                                    }
+                                }
+                            }
+                        }
+                    }
+                ]
+            }
+        ]
+    },
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getDatosMedico/:id
+Descripcion: Retorna toda la información de un médicos en el sistema, respecto a su id
+Input: id
+Output: Nombre, ApellidoPaterno, APellidoMaterno,  Rol, IdMedico, Ubicacion
+Ejemplo: 
+INPUT: id = 1
+OUTPUT:   [
+    {
+        "Ubicacion": "Hospital 1",
+        "IdMedico": 1,
+        "Autorizacion": {
+            "Nombre": "Jose Gerardo",
+            "ApellidoPaterno": "Cantú",
+            "APellidoMaterno": "García",
+            "Rol": "Medico"
+        }
+    }
+]
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getPacientesDeMedico/:id
+Descripcion: Retorna la lista de paciente de un médicos en el sistema, respecto a su id
+Input: id
+Output: Edad, Nombre, ApellidoPaterno, APellidoMaterno,  Nombre, Nombre, Nombre, Nombre,
+Ejemplo: 
+INPUT: id = 1
+OUTPUT:   [
+    {
+        "Edad": 62,
+        "Autorizacion": {
+            "Nombre": "Franco",
+            "ApellidoPaterno": "Sotomayo",
+            "APellidoMaterno": "Casale"
+        },
+        "Parroquia": {
+            "Nombre": "Parroquia 12",
+            "Decanato": {
+                "Nombre": "Decanato 6",
+                "Zona": {
+                    "Nombre": "Zona 3",
+                    "Grupo": {
+                        "Nombre": "Grupo 2"
+                    }
+                }
+            }
+        }
+    },
+    {
+        "Edad": 67,
+        "Autorizacion": {
+            "Nombre": "Marcelo",
+            "ApellidoPaterno": "Marquez",
+            "APellidoMaterno": "Murillo"
+        },
+        "Parroquia": {
+            "Nombre": "Parroquia 15",
+            "Decanato": {
+                "Nombre": "Decanato 8",
+                "Zona": {
+                    "Nombre": "Zona 4",
+                    "Grupo": {
+                        "Nombre": "Grupo 2"
+                    }
+                }
+            }
+        }
+    }
+]
+
+-----------------------------------------------------------------------------
+http://localhost:3000/getExamenes
+Descripcion: Retorna la lista de examenes que hay registrados en el sistema 
+Input: NULL
+Output: IdExamen, Nombre, Siglas, Dimension, Register, Is_active
+Ejemplo: 
+OUTPUT:   [
+    {
+        "IdExamen": 1,
+        "Nombre": "Índice de Katz",
+        "Siglas": "KATZ",
+        "Dimension": "Funcionalidad",
+        "Register": "2022-10-13T18:54:03.193Z",
+        "Is_active": true
+    },
+    {
+        "IdExamen": 2,
+        "Nombre": "Índice de Lawton & Brody",
+        "Siglas": "LW&B",
+        "Dimension": "Funcionalidad",
+        "Register": "2022-10-13T18:54:03.193Z",
+        "Is_active": true
+    },
+    {
+        "IdExamen": 3,
+        "Nombre": "Escala Abreviada de Depresión Geriátrica de Yesavage",
+        "Siglas": "ADGY",
+        "Dimension": "Afectivo",
+        "Register": "2022-10-13T18:54:03.193Z",
+        "Is_active": true
+    },
+    {
+        "IdExamen": 4,
+        "Nombre": "Mini Mental State Examination de Folstein (MMSE-30)",
+        "Siglas": "MMSE",
+        "Dimension": "Cognitiva",
+        "Register": "2022-10-13T18:54:03.193Z",
+        "Is_active": true
+    },
+    {
+        "IdExamen": 5,
+        "Nombre": "Prueba de reloj",
+        "Siglas": "PR",
+        "Dimension": "Cognitiva",
+        "Register": "2022-10-13T18:54:03.193Z",
+        "Is_active": true
+    },
+    {
+        "IdExamen": 6,
+        "Nombre": "Escala Sarc-F",
+        "Siglas": "SARC-F",
+        "Dimension": "Desempeño Físico",
+        "Register": "2022-10-13T18:54:03.193Z",
+        "Is_active": true
+    },
+    {
+        "IdExamen": 7,
+        "Nombre": "Escala de valoración sociofamiliar de Gijón",
+        "Siglas": "VSG",
+        "Dimension": "Riesgo Social",
+        "Register": "2022-10-13T18:54:03.193Z",
+        "Is_active": true
+    },
+    {
+        "IdExamen": 8,
+        "Nombre": "Short Physical Performance Battery (Sppb)",
+        "Siglas": "SPPB",
+        "Dimension": "Desempeño Físico",
+        "Register": "2022-10-13T18:54:03.193Z",
+        "Is_active": true
+    },
+    {
+        "IdExamen": 9,
+        "Nombre": "Clinical Fraility Scale",
+        "Siglas": "CFS",
+        "Dimension": "Desempeño Físico",
+        "Register": "2022-10-13T18:54:03.193Z",
+        "Is_active": true
+    }
+]
+
+
+-----------------------------------------------------------------------------
+
+POST: 
+-----------------------------------------------------------------------------
+http://localhost:3000/AddResultadoDePaciente/:id_paceinte/:id_examen
+Descripcion: Agrega un resultado de una prueba a un paciente, respecto al id de la prueba y el id del paciente
+Input: id_paceinte, id_examen, JSON: resultado, fechaDeExamen, ubicacion
+Output: (AÑADIDO A LA BASE DE DATOS) IdExamenPaciente, Resultado, FechaDeExamen, Ubicacion, Evaluador, Register, Is_active, IdPaciente, IdExamen
+Ejemplo: 
+INPUT: id_paceinte = 1,
+id_examen = 1,
+JSON: {
+    "resultado": 10,
+    "fechaDeExamen": "2022-10-19",
+    "ubicacion": "Hospital Nuevo Sur",
+    "evaluador": "Aplicación Movil"
+}
+OUTPUT:   
+(AÑADIDO A LA BASE DE DATOS)
+{
+    "IdExamenPaciente": 50,
+    "Resultado": 10,
+    "FechaDeExamen": "2022-10-19T00:00:00.000Z",
+    "Ubicacion": "Hospital Nuevo Sur",
+    "Evaluador": "Aplicación Movil",
+    "Register": "2022-10-23T13:52:37.236Z",
+    "Is_active": true,
+    "IdPaciente": 1,
+    "IdExamen": 1
+}
+
+-----------------------------------------------------------------------------
+http://localhost:3000/AddLineaDeAtencion
+Descripcion: Agrega una linea de atencion al sistema
+Input: JSON: telefono, titulo, nombre, ubicacion, idImagen
+Output: (AÑADIDO A LA BASE DE DATOS) IdLineaDeAtencion, Telefono, Titulo, Nombre, Ubicacion, Register, Is_active, IdImagen
+Ejemplo: 
+INPUT: JSON: {
+    "telefono": "8125961982",
+    "titulo": "Psicóloga",
+    "nombre": "Mariana Agustin",
+    "ubicacion": "San Nicolás de Los Garza",
+    "idImagen": 16
+
+}
+OUTPUT:   
+(AÑADIDO A LA BASE DE DATOS)
+{
+    "IdLineaDeAtencion": 5,
+    "Telefono": "8125961982",
+    "Titulo": "Psicóloga",
+    "Nombre": "Mariana Agustin",
+    "Ubicacion": "San Nicolás de Los Garza",
+    "Register": "2022-10-23T13:56:35.360Z",
+    "Is_active": true,
+    "IdImagen": 16
+}

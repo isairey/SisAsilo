@@ -1,0 +1,16 @@
+.Busqueda{
+    font-size: 20px;
+    background-color: white ;
+}
+
+.CDBSidebarMenuItem{
+    background-color: white;
+    /* border-right: 20px; */
+    border-top-left-radius: 20px;
+    border-bottom-left-radius: 20px;
+    margin-left: 10px;
+}
+
+.Busqueda span{
+    /* background-color: white; */
+}

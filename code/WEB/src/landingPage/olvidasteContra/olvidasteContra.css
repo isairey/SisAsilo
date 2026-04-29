@@ -1,0 +1,43 @@
+.left{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.right{
+    text-align: center;
+    background-color: rgb(127,185,193,.20);
+}
+
+.rightContainer2{
+    margin-top: 200px;
+}
+
+.imgLogo{
+    height: 350px;
+    width: 300px;
+    margin-top: 20px;
+}
+
+.userInput{
+    width: 30vw;
+    align-items: center; 
+    border-radius: 10px;
+    height: 60px;
+    margin-left: 10vw;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 30px;
+}
+
+.LD{
+    background-color: white;
+}
+
+.recuperarContra{
+    background-color: rgba(158, 213, 218);
+    width: 300px;
+    height: 70px;
+    border-radius: 5px ;
+    
+    font-size: 25px;
+}

@@ -1,0 +1,262 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "sqlserver"
+  url      = env("DATABASE_URL")
+}
+
+model Accion {
+  IdAccion       Int              @id(map: "PK__Accion__9845169B82928D83") @default(autoincrement())
+  Tema           String?          @db.VarChar(255)
+  Descripcion    String?          @db.VarChar(255)
+  Register       DateTime?        @default(now(), map: "DF__Accion__Register__236943A5") @db.DateTime
+  Is_active      Boolean
+  AccionPaciente AccionPaciente[]
+}
+
+model AccionPaciente {
+  IdAccionPaciente Int       @id(map: "PK__AccionPa__060E2AA173F0D823") @default(autoincrement())
+  Completado       Boolean?
+  Register         DateTime? @default(now(), map: "DF__AccionPac__Regis__2645B050") @db.DateTime
+  Is_active        Boolean
+  IdPaciente       Int?
+  IdAccion         Int?
+  Accion           Accion?   @relation(fields: [IdAccion], references: [IdAccion], onDelete: NoAction, onUpdate: NoAction, map: "FK__AccionPac__IdAcc__282DF8C2")
+  Paciente         Paciente? @relation(fields: [IdPaciente], references: [IdPaciente], onDelete: NoAction, onUpdate: NoAction, map: "FK__AccionPac__IdPac__2739D489")
+}
+
+model Administrador {
+  IdAdministrador Int           @id(map: "PK__Administ__2B3E34A890A04885") @default(autoincrement())
+  Register        DateTime?     @default(now(), map: "DF__Administr__Regis__5FB337D6") @db.DateTime
+  Is_active       Boolean
+  IdAutorizacion  Int?
+  Autorizacion    Autorizacion? @relation(fields: [IdAutorizacion], references: [IdAutorizacion], onDelete: NoAction, onUpdate: NoAction, map: "FK__Administr__IdAut__60A75C0F")
+}
+
+model Autorizacion {
+  IdAutorizacion  Int             @id(map: "PK__Autoriza__387B892EE3DA70A0") @default(autoincrement())
+  Rol             String?         @db.VarChar(255)
+  Correo          String?         @db.VarChar(255)
+  Contrasenia     String?         @db.VarChar(255)
+  Nombre          String?         @db.VarChar(255)
+  ApellidoPaterno String?         @db.VarChar(255)
+  APellidoMaterno String?         @db.VarChar(255)
+  Register        DateTime?       @default(now(), map: "DF__Autorizac__Regis__5CD6CB2B") @db.DateTime
+  Is_active       Boolean
+  Administrador   Administrador[]
+  Medico          Medico[]
+  Paciente        Paciente[]
+}
+
+model Decanato {
+  IdDecanato Int         @id(map: "PK__Decanato__81281BE33029EDA3") @default(autoincrement())
+  Nombre     String?     @db.VarChar(255)
+  Register   DateTime?   @default(now(), map: "DF__Decanato__Regist__71D1E811") @db.DateTime
+  Is_active  Boolean
+  IdZona     Int?
+  Zona       Zona?       @relation(fields: [IdZona], references: [IdZona], onDelete: NoAction, onUpdate: NoAction, map: "FK__Decanato__IdZona__72C60C4A")
+  Parroquia  Parroquia[]
+}
+
+model Examen {
+  IdExamen       Int              @id(map: "PK__Examen__0E8DC9BE231CD351") @default(autoincrement())
+  Nombre         String?          @db.VarChar(255)
+  Siglas         String?          @db.VarChar(255)
+  Dimension      String?          @db.VarChar(255)
+  Register       DateTime?        @default(now(), map: "DF__Examen__Register__7C4F7684") @db.DateTime
+  Is_active      Boolean
+  ExamenPaciente ExamenPaciente[]
+  Pregunta       Pregunta[]
+  RangoDeExamen  RangoDeExamen[]
+}
+
+model ExamenPaciente {
+  IdExamenPaciente Int       @id(map: "PK__ExamenPa__72857D4F9802C9A8") @default(autoincrement())
+  Resultado        Float?    @db.Real
+  FechaDeExamen    DateTime? @db.Date
+  Ubicacion        String?   @db.VarChar(255)
+  Evaluador        String?   @db.VarChar(255)
+  Register         DateTime? @default(now(), map: "DF__ExamenPac__Regis__160F4887") @db.DateTime
+  Is_active        Boolean
+  IdPaciente       Int?
+  IdExamen         Int?
+  Examen           Examen?   @relation(fields: [IdExamen], references: [IdExamen], onDelete: NoAction, onUpdate: NoAction, map: "FK__ExamenPac__IdExa__17F790F9")
+  Paciente         Paciente? @relation(fields: [IdPaciente], references: [IdPaciente], onDelete: NoAction, onUpdate: NoAction, map: "FK__ExamenPac__IdPac__17036CC0")
+}
+
+model Favorito {
+  IdFavorito        Int              @id(map: "PK__Favorito__39DCEE50A1EE30C9") @default(autoincrement())
+  Favorito          Boolean?
+  Register          DateTime?        @default(now(), map: "DF__Favorito__Regist__2FCF1A8A") @db.DateTime
+  Is_active         Boolean
+  IdPaciente        Int?
+  IdLineaDeAtencion Int?
+  LineaDeAtencion   LineaDeAtencion? @relation(fields: [IdLineaDeAtencion], references: [IdLineaDeAtencion], onDelete: NoAction, onUpdate: NoAction, map: "FK__Favorito__IdLine__31B762FC")
+  Paciente          Paciente?        @relation(fields: [IdPaciente], references: [IdPaciente], onDelete: NoAction, onUpdate: NoAction, map: "FK__Favorito__IdPaci__30C33EC3")
+}
+
+model Grupo {
+  IdGrupo   Int       @id(map: "PK__Grupo__303F6FD95C4F80C5") @default(autoincrement())
+  Nombre    String?   @db.VarChar(255)
+  Register  DateTime? @default(now(), map: "DF__Grupo__Register__6B24EA82") @db.DateTime
+  Is_active Boolean
+  Zona      Zona[]
+}
+
+model Imagen {
+  IdImagen        Int               @id(map: "PK__Imagen__B42D8F2A61493DDD") @default(autoincrement())
+  NombreDeImagen  String?           @db.VarChar(255)
+  Ubicacion       String?           @db.VarChar(511)
+  Register        DateTime?         @default(now(), map: "DF__Imagen__Register__6383C8BA") @db.DateTime
+  Is_active       Boolean
+  ImagenPaciente  ImagenPaciente[]
+  LineaDeAtencion LineaDeAtencion[]
+  Medico          Medico[]
+  Paciente        Paciente[]
+  Trofeo          Trofeo[]
+}
+
+model ImagenPaciente {
+  IdImagenPaciente Int       @id(map: "PK__ImagenPa__684ACFE616E1B0CB") @default(autoincrement())
+  Register         DateTime? @default(now(), map: "DF__ImagenPac__Regis__2B0A656D") @db.DateTime
+  Is_active        Boolean
+  IdPaciente       Int?
+  IdImagen         Int?
+  Imagen           Imagen?   @relation(fields: [IdImagen], references: [IdImagen], onDelete: NoAction, onUpdate: NoAction, map: "FK__ImagenPac__IdIma__2CF2ADDF")
+  Paciente         Paciente? @relation(fields: [IdPaciente], references: [IdPaciente], onDelete: NoAction, onUpdate: NoAction, map: "FK__ImagenPac__IdPac__2BFE89A6")
+}
+
+model LineaDeAtencion {
+  IdLineaDeAtencion Int        @id(map: "PK__LineaDeA__EF18E3D6B71AFF73") @default(autoincrement())
+  Telefono          String?    @db.VarChar(255)
+  Titulo            String?    @db.VarChar(255)
+  Nombre            String?    @db.VarChar(255)
+  Ubicacion         String?    @db.VarChar(255)
+  Register          DateTime?  @default(now(), map: "DF__LineaDeAt__Regis__0B91BA14") @db.DateTime
+  Is_active         Boolean
+  IdImagen          Int?
+  Imagen            Imagen?    @relation(fields: [IdImagen], references: [IdImagen], onDelete: NoAction, onUpdate: NoAction, map: "FK__LineaDeAt__IdIma__0C85DE4D")
+  Favorito          Favorito[]
+}
+
+model Medico {
+  IdMedico       Int           @id(map: "PK__Medico__C326E652699F1F93") @default(autoincrement())
+  Ubicacion      String?       @db.VarChar(255)
+  Register       DateTime?     @default(now(), map: "DF__Medico__Register__66603565") @db.DateTime
+  Is_active      Boolean
+  IdAutorizacion Int?
+  IdImagen       Int?
+  Autorizacion   Autorizacion? @relation(fields: [IdAutorizacion], references: [IdAutorizacion], onDelete: NoAction, onUpdate: NoAction, map: "FK__Medico__IdAutori__6754599E")
+  Imagen         Imagen?       @relation(fields: [IdImagen], references: [IdImagen], onDelete: NoAction, onUpdate: NoAction, map: "FK__Medico__IdImagen__68487DD7")
+  Paciente       Paciente[]
+}
+
+model Paciente {
+  IdPaciente        Int              @id(map: "PK__Paciente__C93DB49B58112BD2") @default(autoincrement())
+  Genero            String?          @db.Char(1)
+  Peso              Float?           @db.Real
+  Estatura          Float?           @db.Real
+  TipoDeSangre      String?          @db.VarChar(3)
+  FechaDeNacimiento DateTime?        @db.Date
+  Register          DateTime?        @default(now(), map: "DF__Paciente__Regist__0F624AF8") @db.DateTime
+  Is_active         Boolean
+  Edad              Int?
+  IdAutorizacion    Int?
+  IdMedico          Int?
+  IdParroquia       Int?
+  IdImagen          Int?
+  Autorizacion      Autorizacion?    @relation(fields: [IdAutorizacion], references: [IdAutorizacion], onDelete: NoAction, onUpdate: NoAction, map: "FK__Paciente__IdAuto__10566F31")
+  Imagen            Imagen?          @relation(fields: [IdImagen], references: [IdImagen], onDelete: NoAction, onUpdate: NoAction, map: "FK__Paciente__IdImag__1332DBDC")
+  Medico            Medico?          @relation(fields: [IdMedico], references: [IdMedico], onDelete: NoAction, onUpdate: NoAction, map: "FK__Paciente__IdMedi__114A936A")
+  Parroquia         Parroquia?       @relation(fields: [IdParroquia], references: [IdParroquia], onDelete: NoAction, onUpdate: NoAction, map: "FK__Paciente__IdParr__123EB7A3")
+  AccionPaciente    AccionPaciente[]
+  ExamenPaciente    ExamenPaciente[]
+  Favorito          Favorito[]
+  ImagenPaciente    ImagenPaciente[]
+  TrofeoPaciente    TrofeoPaciente[]
+}
+
+model Parroquia {
+  IdParroquia Int        @id(map: "PK__Parroqui__F2C93B4389A9F534") @default(autoincrement())
+  Nombre      String?    @db.VarChar(255)
+  Register    DateTime?  @default(now(), map: "DF__Parroquia__Regis__75A278F5") @db.DateTime
+  Is_active   Boolean
+  IdDecanato  Int?
+  Decanato    Decanato?  @relation(fields: [IdDecanato], references: [IdDecanato], onDelete: NoAction, onUpdate: NoAction, map: "FK__Parroquia__IdDec__76969D2E")
+  Paciente    Paciente[]
+}
+
+model Pregunta {
+  IdPregunta        Int                 @id(map: "PK__Pregunta__754EC09E253F5B02") @default(autoincrement())
+  Pregunta          String?             @db.VarChar(255)
+  Register          DateTime?           @default(now(), map: "DF__Pregunta__Regist__7F2BE32F") @db.DateTime
+  Is_active         Boolean
+  IdExamen          Int?
+  Examen            Examen?             @relation(fields: [IdExamen], references: [IdExamen], onDelete: NoAction, onUpdate: NoAction, map: "FK__Pregunta__IdExam__00200768")
+  PreguntaRespuesta PreguntaRespuesta[]
+}
+
+model PreguntaRespuesta {
+  IdPreguntaRespuesta Int        @id(map: "PK__Pregunta__CA196A2796383BFC") @default(autoincrement())
+  Register            DateTime?  @default(now(), map: "DF__PreguntaR__Regis__06CD04F7") @db.DateTime
+  Is_active           Boolean
+  IdPregunta          Int?
+  IdRespuesta         Int?
+  Pregunta            Pregunta?  @relation(fields: [IdPregunta], references: [IdPregunta], onDelete: NoAction, onUpdate: NoAction, map: "FK__PreguntaR__IdPre__07C12930")
+  Respuesta           Respuesta? @relation(fields: [IdRespuesta], references: [IdRespuesta], onDelete: NoAction, onUpdate: NoAction, map: "FK__PreguntaR__IdRes__08B54D69")
+}
+
+model RangoDeExamen {
+  IdRangoDeExamen Int       @id(map: "PK__RangoDeE__5017BF1DEDF6D993") @default(autoincrement())
+  MaximoValor     Float?    @db.Real
+  MinimoValor     Float?    @db.Real
+  Indicador       String?   @db.Char(255)
+  Luz             Int?
+  Register        DateTime? @default(now(), map: "DF__RangoDeEx__Regis__02FC7413") @db.DateTime
+  Is_active       Boolean
+  IdExamen        Int?
+  Examen          Examen?   @relation(fields: [IdExamen], references: [IdExamen], onDelete: NoAction, onUpdate: NoAction, map: "FK__RangoDeEx__IdExa__03F0984C")
+}
+
+model Respuesta {
+  IdRespuesta       Int                 @id(map: "PK__Respuest__D348019805B20776") @default(autoincrement())
+  Respuesta         String?             @db.VarChar(255)
+  Peso              Float?              @db.Real
+  Register          DateTime?           @default(now(), map: "DF__Respuesta__Regis__797309D9") @db.DateTime
+  Is_active         Boolean
+  PreguntaRespuesta PreguntaRespuesta[]
+}
+
+model Trofeo {
+  IdTrofeo       Int              @id(map: "PK__Trofeo__EF3CAC4AF3338ABF") @default(autoincrement())
+  Nombre         String?          @db.VarChar(255)
+  Descripcion    String?          @db.VarChar(255)
+  Register       DateTime?        @default(now(), map: "DF__Trofeo__Register__1AD3FDA4") @db.DateTime
+  Is_active      Boolean
+  IdImagen       Int?
+  Imagen         Imagen?          @relation(fields: [IdImagen], references: [IdImagen], onDelete: NoAction, onUpdate: NoAction, map: "FK__Trofeo__IdImagen__1BC821DD")
+  TrofeoPaciente TrofeoPaciente[]
+}
+
+model TrofeoPaciente {
+  IdTrofeoPaciente Int       @id(map: "PK__TrofeoPa__E235D859BF08D779") @default(autoincrement())
+  Completado       Boolean?
+  Register         DateTime? @default(now(), map: "DF__TrofeoPac__Regis__1EA48E88") @db.DateTime
+  Is_active        Boolean
+  IdPaciente       Int?
+  IdTrofeo         Int?
+  Paciente         Paciente? @relation(fields: [IdPaciente], references: [IdPaciente], onDelete: NoAction, onUpdate: NoAction, map: "FK__TrofeoPac__IdPac__1F98B2C1")
+  Trofeo           Trofeo?   @relation(fields: [IdTrofeo], references: [IdTrofeo], onDelete: NoAction, onUpdate: NoAction, map: "FK__TrofeoPac__IdTro__208CD6FA")
+}
+
+model Zona {
+  IdZona    Int        @id(map: "PK__Zona__F631C12DD91DF184") @default(autoincrement())
+  Nombre    String?    @db.VarChar(255)
+  Register  DateTime?  @default(now(), map: "DF__Zona__Register__6E01572D") @db.DateTime
+  Is_active Boolean
+  IdGrupo   Int?
+  Grupo     Grupo?     @relation(fields: [IdGrupo], references: [IdGrupo], onDelete: NoAction, onUpdate: NoAction, map: "FK__Zona__IdGrupo__6EF57B66")
+  Decanato  Decanato[]
+}

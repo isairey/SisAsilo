@@ -1,0 +1,14 @@
+.App {
+  text-align: center;
+  background-color: #d9d9d9;
+  /* font-family:  ; */
+}
+
+@font-face {
+  font-family: "Black";
+  src: local("RecoletaBlack"),url("./assets/Recoleta-Black.ttf") format("truetype");
+}
+
+.specialFont{
+  font-family: "Black";
+}

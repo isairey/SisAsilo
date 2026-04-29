@@ -1,0 +1,67 @@
+.containerFilter{
+    width: 300px;
+    background-color: white;
+    overflow-y: scroll;
+    height: 100vh;
+}
+
+.generalFilter{
+    display: inline-block;
+    margin-top: 30px;
+    width: 90%;
+    height: 112px;
+    background: rgb(255, 255, 255);
+    font-size: 20px;
+    border-radius: 30px;
+    border: 1px solid black;
+}
+
+.filterText{
+    margin-top: 50px;
+    /* margin-right: 50px; */
+    text-align: left;
+    margin-left: 8%;
+    font-weight: bold;
+}
+
+.examsFilter{
+    display: inline-block;
+    margin-top: 15px;
+    width: 90%;
+    height: 112px;
+    font-size: 20px;
+    border-radius: 30px;
+    border:0px;
+}
+
+.MMSEFilter{
+    background-color: rgb(255,214,165,.5);
+}
+
+.CFSFilter{
+    background-color: rgb(202,255,191,.5);
+}
+
+.KATZFilter{
+    background-color: rgb(155,256,255,.5);
+}
+
+.ADGYFilter{
+    background-color: rgb(255,155,239,.5);
+}
+
+.PRFilter{
+    background-color: rgba(255, 155, 158, 0.5);
+}
+
+.SARCFFilter{
+    background-color: rgba(248, 255, 155, 0.5);
+}
+
+.VSGFilter{
+    background-color: rgb(255,214,165,.5);
+}
+
+.SPPBFilter{
+    background-color: rgb(202,255,191,.5);
+}
